@@ -94,7 +94,7 @@ public class EkologicturApplication implements CommandLineRunner{
 				System.out.println("Total de elementos: " + pacotes.getTotalElements());
 				pacotes.forEach(dest -> System.out.println(pacotes.toString()));*/
 				
-				System.out.println("Todos produtos: \n" + pacoteController.getPacotes().toString());
+				System.out.println("Todos produtos: \n" + pacoteController.getAllPacotes().toString());
 
 				
 				break;

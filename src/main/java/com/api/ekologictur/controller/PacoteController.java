@@ -94,13 +94,13 @@ public class PacoteController {
 		}
 	}
 	
-	@RequestMapping(value="/pacotes", method=RequestMethod.GET)
+	/*@RequestMapping(value="/pacotes", method=RequestMethod.GET)
     public ModelAndView getPacotes(){
         ModelAndView mv = new ModelAndView("pacotes");
         List<Pacote> pacotes = pacoteService.findAll();
         mv.addObject("pacotes", pacotes);
         return mv;
-    }
+    }*/
 
 	public Page<Pacote> findAllPorNomePacote(String nome, Pageable sortedByName) {
 		return null;
