@@ -3,12 +3,14 @@ package com.api.ekologictur.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class Destino implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -16,8 +18,11 @@ public class Destino implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idDestino;
+	
 	private String nomeDestino;
+	
 	private String localidade;//pais, estado, provincia
+	
 	private String tipoDestino;//nacional ou internacional
 	
 	@ManyToOne

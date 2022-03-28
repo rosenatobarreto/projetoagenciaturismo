@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
 public class Pacote implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -25,27 +27,22 @@ public class Pacote implements Serializable {
 	private int periodoEmDias;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "destino")
-	private List<Destino> destinos = new ArrayList<>();
+	@OneToMany(mappedBy = "pacote")
+	private List<Destino> destino = new ArrayList<>();
 	
 	public Pacote() {
 		
 	}
-	
-	
 
-	public Pacote(Long idPacote, String nomePacote, String epoca, double preco, int periodoEmDias,
-			List<Destino> destinos) {
+	public Pacote(Long idPacote, String nomePacote, String epoca, double preco, int periodoEmDias) {
 		super();
 		this.idPacote = idPacote;
 		this.nomePacote = nomePacote;
 		this.epoca = epoca;
 		this.preco = preco;
 		this.periodoEmDias = periodoEmDias;
-		this.destinos = destinos;
+		
 	}
-
-
 
 	public Long getIdPacote() {
 		return idPacote;
@@ -87,12 +84,12 @@ public class Pacote implements Serializable {
 		this.periodoEmDias = periodoEmDias;
 	}
 
-	public List<Destino> getDestinos() {
-		return destinos;
+	public List<Destino> getDestino() {
+		return destino;
 	}
 
-	public void setDestinos(List<Destino> destinos) {
-		this.destinos = destinos;
+	public void setDestinos(List<Destino> destino) {
+		this.destino = destino;
 	}
 
 	public static long getSerialversionuid() {
@@ -101,7 +98,7 @@ public class Pacote implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(destinos, epoca, idPacote, nomePacote, periodoEmDias, preco);
+		return Objects.hash(destino, epoca, idPacote, nomePacote, periodoEmDias, preco);
 	}
 
 	@Override
@@ -113,7 +110,7 @@ public class Pacote implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Pacote other = (Pacote) obj;
-		return Objects.equals(destinos, other.destinos) && Objects.equals(epoca, other.epoca)
+		return Objects.equals(destino, other.destino) && Objects.equals(epoca, other.epoca)
 				&& Objects.equals(idPacote, other.idPacote) && Objects.equals(nomePacote, other.nomePacote)
 				&& periodoEmDias == other.periodoEmDias
 				&& Double.doubleToLongBits(preco) == Double.doubleToLongBits(other.preco);
@@ -122,7 +119,7 @@ public class Pacote implements Serializable {
 	@Override
 	public String toString() {
 		return "Pacote [idPacote=" + idPacote + ", nomePacote=" + nomePacote + ", epoca=" + epoca + ", preco=" + preco
-				+ ", periodoEmDias=" + periodoEmDias + ", destinos=" + destinos + "]";
+				+ ", periodoEmDias=" + periodoEmDias + ", destino=" + destino + "]";
 	}
 	
 }
