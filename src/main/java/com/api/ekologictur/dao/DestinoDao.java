@@ -6,7 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import com.api.ekologictur.model.Destino;
 
-//@Repository
+@Repository
 public interface DestinoDao extends PagingAndSortingRepository<Destino, Integer>{
-	//Page<Destino> findAllByTipoDestino(String tipoDestino, Pageable pageable);
+	Page<Destino> findAllByTipoDestino(String tipoDestino, Pageable pageable);
 }

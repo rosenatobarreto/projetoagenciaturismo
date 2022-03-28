@@ -4,13 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -28,15 +26,15 @@ public class Pacote implements Serializable {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "pacote")
-	private List<Destino> destino = new ArrayList<>();
+	private List<Destino> destinos = new ArrayList<>();
 	
 	public Pacote() {
 		
 	}
 
-	public Pacote(Long idPacote, String nomePacote, String epoca, double preco, int periodoEmDias) {
+	public Pacote(String nomePacote, String epoca, double preco, int periodoEmDias) {
 		super();
-		this.idPacote = idPacote;
+		
 		this.nomePacote = nomePacote;
 		this.epoca = epoca;
 		this.preco = preco;
@@ -84,12 +82,12 @@ public class Pacote implements Serializable {
 		this.periodoEmDias = periodoEmDias;
 	}
 
-	public List<Destino> getDestino() {
-		return destino;
+	public List<Destino> getDestinos() {
+		return destinos;
 	}
 
-	public void setDestinos(List<Destino> destino) {
-		this.destino = destino;
+	public void setDestinos(List<Destino> destinos) {
+		this.destinos = destinos;
 	}
 
 	public static long getSerialversionuid() {
@@ -98,7 +96,7 @@ public class Pacote implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(destino, epoca, idPacote, nomePacote, periodoEmDias, preco);
+		return Objects.hash(destinos, epoca, idPacote, nomePacote, periodoEmDias, preco);
 	}
 
 	@Override
@@ -110,7 +108,7 @@ public class Pacote implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Pacote other = (Pacote) obj;
-		return Objects.equals(destino, other.destino) && Objects.equals(epoca, other.epoca)
+		return Objects.equals(destinos, other.destinos) && Objects.equals(epoca, other.epoca)
 				&& Objects.equals(idPacote, other.idPacote) && Objects.equals(nomePacote, other.nomePacote)
 				&& periodoEmDias == other.periodoEmDias
 				&& Double.doubleToLongBits(preco) == Double.doubleToLongBits(other.preco);
@@ -119,7 +117,7 @@ public class Pacote implements Serializable {
 	@Override
 	public String toString() {
 		return "Pacote [idPacote=" + idPacote + ", nomePacote=" + nomePacote + ", epoca=" + epoca + ", preco=" + preco
-				+ ", periodoEmDias=" + periodoEmDias + ", destino=" + destino + "]";
+				+ ", periodoEmDias=" + periodoEmDias + ", destinos=" + destinos + "]";
 	}
 	
 }

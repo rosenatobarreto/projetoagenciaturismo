@@ -17,19 +17,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.ekologictur.model.Destino;
-import com.api.ekologictur.service.DestinoServiceImpl;
+import com.api.ekologictur.service.DestinoService;
 
 @RestController
 @Controller
 public class DestinoController {
 
 	@Autowired
-	private DestinoServiceImpl destinoServiceImpl;
+	private DestinoService destinoService;
 
 	@PostMapping(value="/destino")
 	public ResponseEntity<Destino> createDestino(@RequestBody Destino destino) {
 		try {
-			Destino dest = destinoServiceImpl.save(new Destino(null, destino.getNomeDestino(), destino.getLocalidade(),
+			Destino dest = destinoService.save(new Destino(null, destino.getNomeDestino(), destino.getLocalidade(),
 					destino.getTipoDestino(), destino.getPacote()));
 			return new ResponseEntity<>(dest, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -40,7 +40,7 @@ public class DestinoController {
 	@DeleteMapping(value="/destino/{id}")
 	public ResponseEntity<HttpStatus> deleteDestino(@PathVariable("id") long id) {
 		try {
-			destinoServiceImpl.deleteById(id);
+			destinoService.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -49,7 +49,7 @@ public class DestinoController {
 
 	@GetMapping(value="/destino/{id}")
 	public ResponseEntity<Destino> getDetinoById(@PathVariable("id") long id) {
-		Optional<Destino> dadosDestino = destinoServiceImpl.findById(id);
+		Optional<Destino> dadosDestino = destinoService.findById(id);
 		if (dadosDestino.isPresent()) {
 			return new ResponseEntity<>(dadosDestino.get(), HttpStatus.OK);
 		} else {
@@ -74,7 +74,7 @@ public class DestinoController {
 
 	@PutMapping(value="/destino/{id}")
 	public ResponseEntity<Destino> updatePacote(@PathVariable("id") long id, @RequestBody Destino destino) {
-		Optional<Destino> dadosDestino = destinoServiceImpl.findById(id);
+		Optional<Destino> dadosDestino = destinoService.findById(id);
 		if (dadosDestino.isPresent()) {
 			Destino dest = dadosDestino.get();
 
@@ -83,9 +83,11 @@ public class DestinoController {
 			dest.setTipoDestino(destino.getTipoDestino());
 			dest.setPacote(destino.getPacote());
 
-			return new ResponseEntity<>(destinoServiceImpl.save(dest), HttpStatus.OK);
+			return new ResponseEntity<>(destinoService.save(dest), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+
+
 }
